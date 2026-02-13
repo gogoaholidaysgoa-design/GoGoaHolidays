@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Go Goa Holidays - No Images (Beach Background + Pricing)</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+
+    :root {
+      --bg-dark: #050505;
+      --bg-card: #101010;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #bc13fe;
+      --neon-green: #39ff14;
+      --neon-yellow: #f4e205;
+      --neon-orange: #ff9f43;
+      --neon-red: #ff3f34;
+      --text-main: #ffffff;
+      --text-dim: #b3b3b3;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(5, 5, 5, 0.95);
+      border-bottom: 2px solid var(--neon-yellow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--neon-yellow);
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(244, 226, 5, 0.6);
+    }
+
+    .nav-links { display: flex; gap: 20px; list-style: none; }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--neon-yellow);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a:hover {
+      color: var(--neon-yellow);
+      text-shadow: 0 0 10px var(--neon-yellow);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      background: url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(5,5,5,0.25), rgba(5,5,5,0.92));
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 1100px; }
+
+    .actor-badge {
+      display: inline-block;
+      background: rgba(244, 226, 5, 0.12);
+      border: 1px solid var(--neon-yellow);
+      color: var(--neon-yellow);
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 20px rgba(244, 226, 5, 0.25);
+    }
+
+    .hero h2 {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: white;
+      line-height: 1.1;
+      font-weight: 800;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+
+    .hero h2 span { color: var(--neon-cyan); display: block; text-shadow: 0 0 20px rgba(0, 243, 255, 0.35); }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin: 18px auto 18px;
+      color: #eee;
+      max-width: 900px;
+      line-height: 1.6;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.6);
+    }
+
+    .hero-note {
+      margin: 14px auto 34px;
+      padding: 14px 16px;
+      max-width: 900px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(244, 226, 5, 0.35);
+      border-radius: 12px;
+      color: #ddd;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--neon-yellow);
+      color: black;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(244, 226, 5, 0.35);
+      border-radius: 50px;
+    }
+
+    .cta-btn:hover { transform: translateY(-4px); box-shadow: 0 0 45px rgba(244, 226, 5, 0.65); }
+
+    .trust-bar {
+      background: #0a0a0a;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+      padding: 25px 0;
+    }
+
+    .trust-grid {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .trust-item { display: flex; align-items: center; gap: 12px; color: var(--text-dim); font-size: 1.05rem; }
+
+    .trust-item.highlight { color: var(--neon-yellow); font-weight: bold; text-shadow: 0 0 15px rgba(244, 226, 5, 0.25); }
+
+    .trust-item i { font-size: 1.35rem; }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 800;
+    }
+
+    .section-title span {
+      border-bottom: 3px solid var(--neon-yellow);
+      padding-bottom: 10px;
+      box-shadow: 0 5px 15px -5px var(--neon-yellow);
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #cfcfcf;
+      margin-bottom: 55px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 80px 20px; }
+
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.35s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .card.vip { border-color: var(--neon-yellow); box-shadow: 0 0 25px rgba(244, 226, 5, 0.18); }
+    .card.budget { border-color: var(--neon-green); box-shadow: 0 0 25px rgba(57, 255, 20, 0.18); }
+    .card.sightseeing { border-color: var(--neon-orange); box-shadow: 0 0 25px rgba(255, 159, 67, 0.18); }
+    .card.casino { border-color: var(--neon-red); box-shadow: 0 0 25px rgba(255, 63, 52, 0.18); }
+
+    .card:hover { transform: translateY(-10px); }
+
+    .card-topbar {
+      height: 10px;
+      background: linear-gradient(90deg, rgba(0,243,255,0.0), rgba(0,243,255,0.55), rgba(0,243,255,0.0));
+    }
+    .card.vip .card-topbar { background: linear-gradient(90deg, rgba(244,226,5,0.0), rgba(244,226,5,0.55), rgba(244,226,5,0.0)); }
+    .card.budget .card-topbar { background: linear-gradient(90deg, rgba(57,255,20,0.0), rgba(57,255,20,0.55), rgba(57,255,20,0.0)); }
+    .card.sightseeing .card-topbar { background: linear-gradient(90deg, rgba(255,159,67,0.0), rgba(255,159,67,0.55), rgba(255,159,67,0.0)); }
+    .card.casino .card-topbar { background: linear-gradient(90deg, rgba(255,63,52,0.0), rgba(255,63,52,0.55), rgba(255,63,52,0.0)); }
+
+    .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+
+    .card-title {
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .card.vip .card-title { color: var(--neon-yellow); }
+    .card.sightseeing .card-title { color: var(--neon-orange); }
+    .card.casino .card-title { color: var(--neon-red); }
+
+    .card-text { color: #ccc; font-size: 0.98rem; margin-bottom: 18px; line-height: 1.7; flex-grow: 1; }
+
+    .meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #2a2a2a;
+      background: rgba(0,0,0,0.35);
+      color: #d8d8d8;
+      font-size: 0.85rem;
+    }
+
+    .pill i { color: var(--neon-cyan); }
+
+    .pill.price { border-color: rgba(0,243,255,0.35); }
+    .card.vip .pill.price { border-color: rgba(244,226,5,0.35); }
+    .card.budget .pill.price { border-color: rgba(57,255,20,0.35); }
+    .card.sightseeing .pill.price { border-color: rgba(255,159,67,0.35); }
+    .card.casino .pill.price { border-color: rgba(255,63,52,0.35); }
+
+    .price-tag {
+      display: inline-block;
+      padding: 8px 18px;
+      background: rgba(0, 243, 255, 0.08);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-weight: 800;
+      font-size: 0.95rem;
+      border-radius: 20px;
+      align-self: flex-start;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card.vip .price-tag { border-color: var(--neon-yellow); color: var(--neon-yellow); background: rgba(244, 226, 5, 0.08); }
+    .card.budget .price-tag { border-color: var(--neon-green); color: var(--neon-green); background: rgba(57, 255, 20, 0.08); }
+    .card.sightseeing .price-tag { border-color: var(--neon-orange); color: var(--neon-orange); background: rgba(255, 159, 67, 0.08); }
+    .card.casino .price-tag { border-color: var(--neon-red); color: var(--neon-red); background: rgba(255, 63, 52, 0.08); }
+
+    .feature-list { list-style: none; padding: 0; margin-bottom: 14px; }
+    .feature-list li { margin-bottom: 8px; font-size: 0.9rem; color: #b3b3b3; display: flex; align-items: start; gap: 10px; }
+    .feature-list i { color: var(--neon-cyan); margin-top: 4px; font-size: 1rem; }
+    .card.sightseeing .feature-list i { color: var(--neon-orange); }
+    .card.casino .feature-list i { color: var(--neon-red); }
+
+    .casino-bg { background: linear-gradient(to bottom, #000000, #1a0505); }
+    .sightseeing-bg { background: linear-gradient(to bottom, #080808, #0a0a0a); }
+    .adventure-bg { background: linear-gradient(to bottom, #050505, #080808); }
+    .stays-bg { background: #080808; }
+
+    .contact-section {
+      position: relative;
+      padding: 120px 20px;
+      background: url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px circle at 15% 30%, rgba(0, 243, 255, 0.10), transparent 55%),
+        radial-gradient(900px circle at 85% 30%, rgba(244, 226, 5, 0.08), transparent 55%),
+        linear-gradient(to bottom, rgba(0,0,0,0.70), rgba(0,0,0,0.92));
+    }
+
+    .form-box {
+      position: relative;
+      z-index: 2;
+      max-width: 750px;
+      margin: 0 auto;
+      background: rgba(20, 20, 20, 0.85);
+      backdrop-filter: blur(18px);
+      padding: 50px;
+      border: 1px solid var(--neon-yellow);
+      border-radius: 18px;
+      box-shadow: 0 0 35px rgba(244, 226, 5, 0.2);
+    }
+
+    .form-box h3 { color: white; font-size: 2.2rem; text-align: center; margin-bottom: 10px; }
+    .form-box h3 span { color: var(--neon-yellow); }
+
+    .form-note {
+      text-align: center;
+      color: #d6d6d6;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .input-group { margin-bottom: 22px; }
+
+    label { display: block; color: var(--neon-cyan); margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+    input, select, textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #444;
+      padding: 14px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--neon-yellow); box-shadow: 0 0 12px rgba(244, 226, 5, 0.3); }
+
+    button.submit {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(45deg, var(--neon-yellow), #e1b12c);
+      border: none;
+      color: black;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 12px;
+      border-radius: 8px;
+    }
+
+    button.submit:hover { filter: brightness(1.1); box-shadow: 0 0 22px var(--neon-yellow); transform: translateY(-2px); }
+
+    footer { background: #000; padding: 50px 20px; text-align: center; border-top: 1px solid #222; }
+    footer h2 { color: white; margin-bottom: 10px; letter-spacing: 2px; }
+
+    .email-neon {
+      color: var(--neon-yellow);
+      font-size: 1.1rem;
+      text-decoration: none;
+      border: 1px solid var(--neon-yellow);
+      padding: 10px 25px;
+      display: inline-block;
+      margin: 18px 0;
+      transition: 0.3s;
+      border-radius: 50px;
+    }
+
+    .email-neon:hover { background: var(--neon-yellow); color: black; box-shadow: 0 0 22px var(--neon-yellow); }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2.6rem; }
+      .nav-links { display: none; }
+      .form-box { padding: 30px 18px; }
+      .section-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><h1>Go Goa <span>Holidays</span></h1></div>
+    <ul class="nav-links">
+      <li><a href="#services">VIP</a></li>
+      <li><a href="#casino" style="color: var(--neon-red);">Casino</a></li>
+      <li><a href="#sightseeing" style="color: var(--neon-orange);">Sightseeing</a></li>
+      <li><a href="#adventure">Adventure</a></li>
+      <li><a href="#stays">Stays</a></li>
+      <li><a href="#rentals">Rentals</a></li>
+      <li><a href="#contact">Book</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="actor-badge">★ Telugu Film Actor Owned ★</div>
+    <h2>Celebrity Level<br><span>Goa Experiences</span></h2>
+    <p>Transparent pricing ranges added across all services to match prevailing online rates.</p>
+    <div class="hero-note">
+      <strong style="color: var(--neon-yellow);">Pricing note:</strong> Prices below are indicative and <strong>as per availability</strong> (season, weekday/weekend, group size, timings). Final quote will be confirmed on booking.
+      <br><br>
+      <strong style="color: var(--neon-yellow);">Stays note:</strong> Villas/guest houses shown under “Stays” are <strong>owned properties of Go Goa Holidays</strong> (subject to availability).
+    </div>
+    <a href="#contact" class="cta-btn">Get Final Quote</a>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-grid">
+    <div class="trust-item highlight"><i class="fas fa-star"></i> Celebrity Owned</div>
+    <div class="trust-item"><i class="fas fa-check-circle"></i> 100% Scam Free</div>
+    <div class="trust-item highlight"><i class="fas fa-crown"></i> VIP Services</div>
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> Total Privacy</div>
+  </div>
+</div>
+
+<div class="container" id="services">
+  <h2 class="section-title"><span>Exclusive Services</span></h2>
+  <p class="section-sub">Prices are indicative and depend on date, season and availability.</p>
+  <div class="grid-container">
+
+    <div class="card vip">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-crown"></i> Celebrity VIP Package</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹8,999 – ₹24,999 / day</span>
+          <span class="pill"><i class="fas fa-user-shield"></i> Security + VIP entry + transport</span>
+        </div>
+        <p class="card-text">Nightlife planning, premium tables, private transport, and privacy-focused coordination for couples & groups.</p>
+        <div class="price-tag">VIP Quote</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-church"></i> Old Goa Heritage</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹1,499 – ₹3,999 / car</span>
+          <span class="pill"><i class="fas fa-route"></i> Half/Full day options</span>
+        </div>
+        <p class="card-text">Basilica of Bom Jesus, Se Cathedral and Panjim heritage points in a relaxed tour.</p>
+        <div class="price-tag">Guide Optional</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-ship"></i> Mandovi Yacht / Cruise</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹9,999 – ₹24,999 / 2 hrs</span>
+          <span class="pill"><i class="fas fa-sun"></i> Sunset slots higher</span>
+        </div>
+        <p class="card-text">Private yacht / cruise party on Mandovi river with DJ & snacks (based on package).</p>
+        <div class="price-tag">On Request</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container casino-bg" id="casino">
+  <h2 class="section-title"><span style="border-color: var(--neon-red); box-shadow: 0 3px 15px -5px var(--neon-red);">Casino Packages</span></h2>
+  <p class="section-sub">Casino entry prices vary by ship, weekday/weekend, inclusions and season.</p>
+  <div class="grid-container">
+
+    <div class="card casino" style="border-width: 2px;">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-gem"></i> Premium Royal</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹4,999 – ₹9,999 / person</span>
+          <span class="pill"><i class="fas fa-utensils"></i> Premium drinks + buffet + chips</span>
+        </div>
+        <ul class="feature-list">
+          <li><i class="fas fa-ship"></i> Mandovi river casino cruise entry</li>
+          <li><i class="fas fa-glass-cheers"></i> Drinks & dinner (as per pass)</li>
+          <li><i class="fas fa-coins"></i> Chips (as per category)</li>
+        </ul>
+        <div class="price-tag">VIP All Access</div>
+      </div>
+    </div>
+
+    <div class="card casino">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-dice"></i> Budget Player</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹2,999 – ₹5,499 / person</span>
+          <span class="pill"><i class="fas fa-music"></i> Entertainment deck</span>
+        </div>
+        <ul class="feature-list">
+          <li><i class="fas fa-ship"></i> Standard casino pass (ship depends)</li>
+          <li><i class="fas fa-beer"></i> House brand drinks (as per pass)</li>
+          <li><i class="fas fa-utensils"></i> Buffet (as per pass)</li>
+        </ul>
+        <div class="price-tag">Best Value</div>
+      </div>
+    </div>
+
+    <div class="card casino" style="border-color: #555; box-shadow: none;">
+      <div class="card-topbar" style="background: linear-gradient(90deg, rgba(180,180,180,0.0), rgba(180,180,180,0.35), rgba(180,180,180,0.0));"></div>
+      <div class="card-content">
+        <div class="card-title" style="color: #bbb;"><i class="fas fa-ticket-alt"></i> Economy Entry</div>
+        <div class="meta">
+          <span class="pill price" style="border-color:#555;"><i class="fas fa-tag" style="color:#bbb;"></i> Typical: ₹1,999 – ₹3,499 / person</span>
+          <span class="pill" style="border-color:#333;"><i class="fas fa-clock" style="color:#bbb;"></i> Weekday slots</span>
+        </div>
+        <ul class="feature-list">
+          <li><i class="fas fa-ship" style="color:#bbb;"></i> Entry + basic refreshments</li>
+          <li><i class="fas fa-coins" style="color:#bbb;"></i> Starter chips (varies)</li>
+        </ul>
+        <div class="price-tag" style="border-color:#555; color:#bbb; background:#222;">Entry Level</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container sightseeing-bg" id="sightseeing">
+  <h2 class="section-title"><span style="border-color: var(--neon-orange); box-shadow: 0 3px 15px -5px var(--neon-orange);">Goa Sightseeing</span></h2>
+  <p class="section-sub">Rates depend on vehicle type (hatchback/sedan/SUV) and tour duration.</p>
+  <div class="grid-container">
+
+    <div class="card sightseeing">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-map-marker-alt"></i> North Goa Tour</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹1,999 – ₹4,999 / car</span>
+          <span class="pill"><i class="fas fa-clock"></i> 8–10 hrs</span>
+        </div>
+        <ul class="feature-list">
+          <li><i class="fas fa-umbrella-beach"></i> Calangute, Baga, Candolim</li>
+          <li><i class="fas fa-chess-rook"></i> Fort Aguada & Chapora</li>
+          <li><i class="fas fa-shopping-bag"></i> Anjuna flea / Tito's lane</li>
+        </ul>
+        <div class="price-tag">Full Day Tour</div>
+      </div>
+    </div>
+
+    <div class="card sightseeing">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-camera"></i> South Goa Tour</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹2,499 – ₹6,499 / car</span>
+          <span class="pill"><i class="fas fa-route"></i> Longer distances</span>
+        </div>
+        <ul class="feature-list">
+          <li><i class="fas fa-church"></i> Heritage + temples</li>
+          <li><i class="fas fa-umbrella-beach"></i> Colva, Benaulim, Palolem</li>
+          <li><i class="fas fa-ship"></i> Cruise add-on possible</li>
+        </ul>
+        <div class="price-tag">Heritage & Nature</div>
+      </div>
+    </div>
+
+    <div class="card sightseeing">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-water"></i> Dudhsagar & Spice Farm</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹1,999 – ₹4,999 / person</span>
+          <span class="pill"><i class="fas fa-jeep"></i> Jeep + permits</span>
+        </div>
+        <ul class="feature-list">
+          <li><i class="fas fa-leaf"></i> Forest entry & permits (seasonal rules)</li>
+          <li><i class="fas fa-utensils"></i> Spice farm lunch (as per package)</li>
+        </ul>
+        <div class="price-tag">Jungle Safari Combo</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container adventure-bg" id="adventure">
+  <h2 class="section-title"><span>Adventure & Nightlife</span></h2>
+  <p class="section-sub">Water sports are seasonal (commonly Oct–Apr) and depend on sea conditions.</p>
+  <div class="grid-container">
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-water"></i> Water Sports Combo</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Online range: ₹999 – ₹2,500 / person</span>
+          <span class="pill"><i class="fas fa-parachute-box"></i> Parasailing + Jet ski + Banana + Bumper + Speed boat</span>
+        </div>
+        <p class="card-text">Combo pricing varies by beach, time-slot, and inclusions. Final quote confirmed on booking.</p>
+        <div class="price-tag">Combos Available</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-music"></i> Nightlife / Club Tables</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹2,999 – ₹24,999+</span>
+          <span class="pill"><i class="fas fa-glass-martini-alt"></i> Depends on club + day</span>
+        </div>
+        <p class="card-text">Table reservations, entry support, and complete night plan around Baga/Tito’s lane (as per availability).</p>
+        <div class="price-tag">Reservations</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container stays-bg" id="stays">
+  <h2 class="section-title"><span>Stays (Owned Properties)</span></h2>
+  <p class="section-sub"><strong>Important:</strong> Stays listed here are <strong>owned properties of Go Goa Holidays</strong> (subject to availability). Seasonal pricing applies.</p>
+  <div class="grid-container">
+
+    <div class="card vip">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-star"></i> Luxury Villa (3–6 BHK)</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹18,000 – ₹65,000 / night</span>
+          <span class="pill"><i class="fas fa-swimming-pool"></i> Private pool options</span>
+        </div>
+        <p class="card-text">Candolim/Anjuna area villas; caretaker and chef options available depending on property.</p>
+        <div class="price-tag">Owned Stays</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-hotel"></i> Premium Resort Rooms</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹4,500 – ₹14,000 / night</span>
+          <span class="pill"><i class="fas fa-concierge-bell"></i> Breakfast varies</span>
+        </div>
+        <p class="card-text">Branded hotels/resorts as per availability; best match for couples and families.</p>
+        <div class="price-tag">Best Deals</div>
+      </div>
+    </div>
+
+    <div class="card budget">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title" style="color: var(--neon-green);"><i class="fas fa-piggy-bank"></i> Budget Rooms / Guest House</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Typical: ₹1,200 – ₹3,500 / night</span>
+          <span class="pill"><i class="fas fa-users"></i> Group friendly</span>
+        </div>
+        <p class="card-text">Clean AC stays around North/South Goa based on your itinerary and budget.</p>
+        <div class="price-tag" style="border-color: var(--neon-green); color: var(--neon-green); background: rgba(57, 255, 20, 0.08);">Best Value</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container" id="rentals">
+  <h2 class="section-title"><span>Bike & Car Rentals</span></h2>
+  <p class="section-sub">Rental rates change by bike CC, weekday/weekend and duration.</p>
+  <div class="grid-container">
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-motorcycle"></i> Scooters (Activa / 125cc)</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Online ref: ₹40–₹45 / hour</span>
+          <span class="pill"><i class="fas fa-calendar"></i> Weekly ~ ₹2,000</span>
+        </div>
+        <p class="card-text">Best for short trips between beaches and markets. Helmet support available.</p>
+        <div class="price-tag">Pickup Points</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-motorcycle"></i> Bikes (150–220cc)</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Online ref: ₹45–₹67 / hour</span>
+          <span class="pill"><i class="fas fa-calendar"></i> Weekly ~ ₹2,499–₹2,999</span>
+        </div>
+        <p class="card-text">Perfect for longer North/South rides with better comfort and stability.</p>
+        <div class="price-tag">Daily/Weekly</div>
+      </div>
+    </div>
+
+    <div class="card vip">
+      <div class="card-topbar"></div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas fa-motorcycle"></i> Royal Enfield (350cc)</div>
+        <div class="meta">
+          <span class="pill price"><i class="fas fa-tag"></i> Online ref: ~ ₹60/hr weekdays, up to ₹100/hr weekends</span>
+          <span class="pill"><i class="fas fa-calendar"></i> Weekly ~ ₹2,999</span>
+        </div>
+        <p class="card-text">Classic Goa road-trip option. Availability depends on model and season.</p>
+        <div class="price-tag">Premium Bikes</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="form-box">
+    <h3>Get Final <span>Quote</span></h3>
+    <p class="form-note">Prices are as per availability. Share your dates + number of people to get exact pricing and best deals.</p>
+    <form action="mailto:gogoaholidays.goa@gmail.com" method="post" enctype="text/plain">
+      <div class="input-group">
+        <label>Name</label>
+        <input type="text" name="name" required placeholder="John Doe" />
+      </div>
+      <div class="input-group">
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required placeholder="+91 99999 99999" />
+      </div>
+      <div class="input-group">
+        <label>Service Type</label>
+        <select name="service">
+          <option>Choose Service...</option>
+          <option>Celebrity VIP Package</option>
+          <option>Casino Package (Premium/Budget/Economy)</option>
+          <option>North Goa Sightseeing</option>
+          <option>South Goa Sightseeing</option>
+          <option>Dudhsagar & Spice Farm</option>
+          <option>Water Sports Combo</option>
+          <option>Luxury Villa (Owned)</option>
+          <option>Resort / Hotel</option>
+          <option>Budget Stay (Owned)</option>
+          <option>Bike / Car Rental</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Dates</label>
+        <div style="display: flex; gap: 10px;">
+          <input type="date" name="checkin" />
+          <input type="date" name="checkout" />
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Message</label>
+        <textarea name="message" rows="3" placeholder="Dates, people count, North/South preference, budget..."></textarea>
+      </div>
+      <button type="submit" class="submit">Request Quote</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <h2>GO GOA HOLIDAYS</h2>
+  <p style="color: var(--neon-yellow); margin-bottom: 15px; font-weight: bold;">★ Telugu Film Actor Owned ★</p>
+  <a href="mailto:gogoaholidays.goa@gmail.com" class="email-neon"><i class="fas fa-envelope"></i> gogoaholidays.goa@gmail.com</a>
+  <div style="margin-top: 30px; color: #444; font-size: 0.8rem;">
+    &copy; 2026 Go Goa Holidays. All Rights Reserved.<br />
+    Prices are indicative and as per availability.
+  </div>
+</footer>
+
+</body>
+</html>
